@@ -1,0 +1,6 @@
+[submodule "dependencies/thread-pool"]
+	path = dependencies/thread-pool
+	url = git@github.com:bshoshany/thread-pool.git
+[submodule "dependencies/tinyobjloader"]
+	path = dependencies/tinyobjloader
+	url = git@github.com:tinyobjloader/tinyobjloader.git
