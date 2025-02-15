@@ -10,12 +10,13 @@
 #include "constants.hpp"
 #include "intrinsics.hpp"
 #include "types.hpp"
+#include "aligned_vector.hpp"
 
 namespace Archa {
 
 class FrameBuffer {
   glm::ivec2 size{};
-  ALIGN_SIMD std::vector<uint8> pixels{};
+  AlignedVector<uint8, SIMD_ALIGN_WIDTH> pixels{};
 
 public:
   void create(const glm::ivec2 &size);

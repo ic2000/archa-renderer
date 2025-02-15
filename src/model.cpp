@@ -85,9 +85,9 @@ static glm::vec2 wrap_uv(const glm::vec2 &uv) {
 static glm::vec3 calculate_triangle_normal(const glm::vec3 &v1,
                                            const glm::vec3 &v2,
                                            const glm::vec3 &v3) {
-  const auto e1 = v2 - v1;
-  const auto e2 = v3 - v1;
-  const auto normal = glm::normalize(glm::cross(e1, e2));
+  const auto e1{v2 - v1};
+  const auto e2{v3 - v1};
+  const auto normal{glm::normalize(glm::cross(e1, e2))};
 
   return normal;
 }
@@ -102,23 +102,23 @@ void Model::load(const std::filesystem::path &file_path) {
       fatal_error("TinyObjReader: " + reader.Error());
 
   if (!reader.Warning().empty())
-    Logger().warn() << "TinyObjReader: " << reader.Warning() << std::endl;
+    Logger().warn() << "TinyObjReader: " << reader.Warning() << '\n';
 
-  Logger().info() << "Loading model: " << file_path << std::endl;
+  Logger().info() << "Loading model: " << file_path << '\n';
 
   name = file_path.string();
 
-  const auto &attrib = reader.GetAttrib();
-  const auto &shapes = reader.GetShapes();
-  const auto &materials = reader.GetMaterials();
+  const auto &attrib{reader.GetAttrib()};
+  const auto &shapes{reader.GetShapes()};
+  const auto &materials{reader.GetMaterials()};
 
   add_verticies(attrib, vertices);
 
   for (uint s{0}; s < shapes.size(); s++) {
-    uint index_offset = 0;
+    uint index_offset{0};
 
     for (uint f{0}; f < shapes[s].mesh.num_face_vertices.size(); f++) {
-      const auto fv = shapes[s].mesh.num_face_vertices[f];
+      const auto fv{shapes[s].mesh.num_face_vertices[f]};
 
       if (fv != 3)
         fatal_error("Only triangles are supported");
@@ -181,7 +181,7 @@ void Model::load(const std::filesystem::path &file_path) {
 
   Logger().info() << "Loaded model: " << file_path << ", " << vertices.size()
                   << " vertices, " << triangles.size() << " triangles"
-                  << std::endl;
+                  << '\n';
 }
 
 } // namespace Archa

@@ -2,13 +2,15 @@
 
 #include "config.hpp"
 
+#include <aligned_vector.hpp>
 #include <vector>
+
 
 namespace Archa {
 
 class ZBuffer {
   glm::ivec2 size{};
-  ALIGN_SIMD std::vector<float> data{};
+  AlignedVector<float, SIMD_ALIGN_WIDTH> data{};
 
 public:
   void create(const glm::ivec2 &size);

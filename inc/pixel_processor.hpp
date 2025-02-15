@@ -98,7 +98,7 @@ class PixelProcessor {
                      const std::array<typename T::FloatVec, 3> &clip_z_vecs) {
 
     std::array<typename T::FloatVec, 3> z_result_vec{};
-    alignas(T::ALIGN_WIDTH) typename T::template Array<float> z_values{};
+    alignas(SIMD_ALIGN_WIDTH) typename T::template Array<float> z_values{};
 
     for (uint i{0}; i < bc_vecs.size(); i++)
       z_result_vec[i] = T::multiply_floats(bc_vecs[i], clip_z_vecs[i]);
@@ -115,7 +115,7 @@ class PixelProcessor {
 
     std::array<std::array<typename T::FloatVec, 3>, 4> colours_result_vecs{};
 
-    alignas(T::ALIGN_WIDTH) std::array<typename T::template Array<int>, 4>
+    alignas(SIMD_ALIGN_WIDTH) std::array<typename T::template Array<int>, 4>
         colours{};
 
     for (uint c{0}; c < colours_result_vecs.size(); c++) {
@@ -167,8 +167,8 @@ class PixelProcessor {
     uv_y_vec =
         T::convert_to_ints(T::multiply_floats(uv_y_vec, texture_size_y_vec));
 
-    alignas(T::ALIGN_WIDTH) typename T::template Array<int> uv_x{};
-    alignas(T::ALIGN_WIDTH) typename T::template Array<int> uv_y{};
+    alignas(SIMD_ALIGN_WIDTH) typename T::template Array<int> uv_x{};
+    alignas(SIMD_ALIGN_WIDTH) typename T::template Array<int> uv_y{};
 
     T::store_ints(uv_x.data(), uv_x_vec);
     T::store_ints(uv_y.data(), uv_y_vec);

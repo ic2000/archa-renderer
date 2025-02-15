@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "config.hpp"
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <imgui-SFML.h>
@@ -128,13 +129,16 @@ void Game::show_fps(float fps) {
 void Game::render_viewport() {
   viewport.render();
 
-  const auto &texture = viewport.get_texture();
+  const auto &texture{viewport.get_texture()};
   window.draw(sf::Sprite{texture});
 }
 
 void Game::init(const glm::ivec2 &size, const std::string &title,
                 float resolution_scale) {
   this->resolution_scale = resolution_scale;
+
+  Logger().info() << "Creating window of size " << size.x << "x" << size.y
+                  << '\n';
 
   window.create({static_cast<uint>(size.x), static_cast<uint>(size.y)},
                 title.c_str());
@@ -184,7 +188,22 @@ void Game::run(uint max_frame_rate) {
         window.close();
 
       else if (event.type == sf::Event::Resized) {
-        // resize_game_view({event.size.width, event.size.height});
+        auto new_size{window.getSize()};
+
+        new_size.x = new_size.x - (new_size.x % SIMD_ALIGN_WIDTH);
+        new_size.y = new_size.y - (new_size.y % SIMD_ALIGN_WIDTH);
+
+        if (new_size.x == 0)
+          new_size.x = SIMD_ALIGN_WIDTH;
+
+        if (new_size.y == 0)
+          new_size.y = SIMD_ALIGN_WIDTH;
+
+        Logger().info() << "Resizing window to " << new_size.x << "x"
+                        << new_size.y << '\n';
+
+        window.setSize(new_size);
+        resize_game_view({new_size.x, new_size.y});
       }
     }
 

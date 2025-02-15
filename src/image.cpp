@@ -15,7 +15,7 @@ void Image::load(const std::filesystem::path &file_path) {
 
   Logger().info() << "Loaded image: " << file_path
                   << ", size: " << image.getSize().x << "x" << image.getSize().y
-                  << std::endl;
+                  << '\n';
 }
 
 const glm::ivec2 &Image::get_size() const { return size; }

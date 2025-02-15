@@ -1,6 +1,7 @@
 #include "z_buffer.hpp"
 
 #include "intrinsics.hpp"
+#include "logger.hpp"
 #include "types.hpp"
 
 namespace Archa {
@@ -38,12 +39,14 @@ void ZBuffer::clear_lane_sse2(int i) {
 //   auto i{0};
 
 // #ifdef USING_SIMD_AVX2
-//   for (; i < std::ssize(data) - (AVX2::LANE_WIDTH - 1); i += AVX2::LANE_WIDTH)
+//   for (; i < std::ssize(data) - (AVX2::LANE_WIDTH - 1); i +=
+//   AVX2::LANE_WIDTH)
 //     clear_lane_avx2(i);
 // #endif
 
 // #ifdef USING_SIMD_SSE2
-//   for (; i < std::ssize(data) - (SSE2::LANE_WIDTH - 1); i += SSE2::LANE_WIDTH)
+//   for (; i < std::ssize(data) - (SSE2::LANE_WIDTH - 1); i +=
+//   SSE2::LANE_WIDTH)
 //     clear_lane_sse2(i);
 // #endif
 

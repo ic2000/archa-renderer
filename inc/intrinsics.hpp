@@ -20,7 +20,6 @@ class SSE2 {
 #ifdef USING_SIMD_SSE2
 public:
   static constexpr auto LANE_WIDTH{4};
-  static constexpr auto ALIGN_WIDTH{ALIGN_SSE2_WIDTH};
 
   using IntVec = __m128i;
   using FloatVec = __m128;
@@ -81,7 +80,6 @@ class AVX2 {
 #ifdef USING_SIMD_AVX2
 public:
   static constexpr auto LANE_WIDTH{8};
-  static constexpr auto ALIGN_WIDTH{ALIGN_AVX2_WIDTH};
 
   using IntVec = __m256i;
   using FloatVec = __m256;

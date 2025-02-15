@@ -11,7 +11,7 @@ void Texture::load(const std::filesystem::path &file_path) {
 
   Logger().info() << "Loaded texture: " << file_path
                   << ", size: " << texture.getSize().x << "x"
-                  << texture.getSize().y << std::endl;
+                  << texture.getSize().y << '\n';
 }
 
 } // namespace Archa
